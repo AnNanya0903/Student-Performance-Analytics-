@@ -8,8 +8,10 @@ performance data.
 Run with:  streamlit run app.py
 """
 from pathlib import Path
+import io
 
 import pandas as pd
+import requests
 import streamlit as st
 
 from analysis.cleaning import ValidationError, clean_dataset, data_quality_report
@@ -64,13 +66,16 @@ def process_dataset(raw_df: pd.DataFrame):
 def safe_load(uploaded_file):
     """Load + process a dataset, surfacing friendly errors instead of tracebacks."""
     try:
-        raw_df = load_raw_csv(uploaded_file)
+        if isinstance(uploaded_file, pd.DataFrame):
+            raw_df = uploaded_file
+        else:
+            raw_df = load_raw_csv(uploaded_file)
     except Exception as e:
-        st.error(f"Could not read the CSV file: {e}")
+        st.error(f"Could not read the data source: {e}")
         return None, None
 
     if raw_df.empty:
-        st.error("The uploaded file is empty.")
+        st.error("The data source is empty.")
         return None, None
 
     try:
@@ -105,12 +110,31 @@ st.sidebar.markdown(
 )
 
 st.sidebar.markdown("### 🗂 Dataset")
-data_source = st.sidebar.radio("Choose data source", ["Sample Dataset", "Upload CSV"], label_visibility="collapsed")
+data_source = st.sidebar.radio("Choose data source", ["Sample Dataset", "Upload CSV", "Google Sheets"], label_visibility="collapsed")
 
 uploaded_file = None
+source_for_load = None
+
 if data_source == "Upload CSV":
     uploaded_file = st.sidebar.file_uploader("Upload student CSV", type=["csv"])
     source_for_load = uploaded_file
+elif data_source == "Google Sheets":
+    st.sidebar.markdown("#### Google Sheets")
+    sheet_url = st.sidebar.text_input("Paste Google Sheet URL (must be public)", placeholder="https://docs.google.com/spreadsheets/d/...")
+    gid = st.sidebar.text_input("Sheet GID (optional, default: first sheet)", value="0")
+    
+    if sheet_url and st.sidebar.button("Load from Google Sheets"):
+        try:
+            sheet_id = sheet_url.split("/d/")[1].split("/")[0]
+            csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}"
+            import requests
+            response = requests.get(csv_url, timeout=30)
+            response.raise_for_status()
+            source_for_load = pd.read_csv(io.StringIO(response.text))
+            st.sidebar.success("Google Sheet loaded successfully!")
+        except Exception as e:
+            st.sidebar.error(f"Failed to load Google Sheet: {e}")
+            source_for_load = None
 else:
     source_for_load = DEFAULT_DATA_PATH
 

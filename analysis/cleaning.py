@@ -15,6 +15,27 @@ REQUIRED_COLUMNS = [
     "study_hours_per_week", "extracurricular", "internet_access", "location",
 ]
 
+COLUMN_ALIASES = {
+    "student_id": ["student_id", "id", "student id", "studentid", "roll_no", "roll_number", "roll no", "admission_no", "admission_number"],
+    "name": ["name", "student_name", "student name", "full_name", "full name", "studentname", "students_name"],
+    "gender": ["gender", "sex", "student_gender", "student gender"],
+    "age": ["age", "student_age", "student age", "years"],
+    "department": ["department", "dept", "branch", "course", "program"],
+    "semester": ["semester", "sem", "term", "year", "academic_year", "academic year"],
+    "attendance_percentage": ["attendance_percentage", "attendance", "attendance %", "attendance percentage", "attn", "attendance_pct"],
+    "math_score": ["math_score", "math", "maths", "mathematics", "math_score", "math_marks", "math marks"],
+    "science_score": ["science_score", "science", "physics", "chemistry", "biology", "science_score", "science_marks"],
+    "programming_score": ["programming_score", "programming", "coding", "programming_score", "programming_marks", "computer"],
+    "english_score": ["english_score", "english", "language", "english_score", "english_marks"],
+    "assignment_score": ["assignment_score", "assignment", "assignments", "assignment_score", "assignment_marks", "project"],
+    "internal_score": ["internal_score", "internal", "internal_marks", "internal_score", "quiz", "quizzes", "midterm", "mid_term"],
+    "final_exam_score": ["final_exam_score", "final", "final_exam", "final exam", "final_score", "finalexam", "end_term", "endterm"],
+    "study_hours_per_week": ["study_hours_per_week", "study_hours", "study hours", "hours_per_week", "study_time", "study_time_per_week"],
+    "extracurricular": ["extracurricular", "extra_curricular", "activities", "hobbies", "sports", "clubs"],
+    "internet_access": ["internet_access", "internet", "internet access", "connectivity", "network"],
+    "location": ["location", "city", "address", "region", "area", "residence", "hometown"],
+}
+
 SCORE_COLUMNS = [
     "math_score", "science_score", "programming_score", "english_score",
     "assignment_score", "internal_score", "final_exam_score",
@@ -38,6 +59,20 @@ class ValidationError(Exception):
 def normalize_column_names(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df.columns = [str(c).strip().lower().replace(" ", "_").replace("-", "_") for c in df.columns]
+    return df
+
+
+def _try_map_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """Attempt to map alternative column names to canonical names."""
+    df = df.copy()
+    current_cols = {c.lower().strip(): c for c in df.columns}
+    for canonical, aliases in COLUMN_ALIASES.items():
+        for alias in aliases:
+            alias_norm = alias.lower().strip().replace(" ", "_").replace("-", "_")
+            if alias_norm in current_cols and canonical not in df.columns:
+                original_col = current_cols[alias_norm]
+                df = df.rename(columns={original_col: canonical})
+                break
     return df
 
 
@@ -66,11 +101,15 @@ def clean_dataset(raw_df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     }
 
     df = normalize_column_names(raw_df)
+    df = _try_map_columns(df)
 
     missing_cols = validate_columns(df)
     if missing_cols:
+        available_cols = [c for c in raw_df.columns if str(c).strip()]
         raise ValidationError(
-            f"Missing required column(s): {', '.join(missing_cols)}"
+            f"Missing required column(s): {', '.join(missing_cols)}. "
+            f"Found columns: {', '.join(available_cols)}. "
+            f"Please rename your columns to match the required format."
         )
 
     # --- Whitespace & categorical normalization -------------------------
