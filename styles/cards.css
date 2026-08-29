@@ -1,9 +1,11 @@
 /* Minimal card effects only — no layout-breaking rules */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
-/* Ensure emojis render properly alongside Inter font */
-html, body, [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {
-  font-family: 'Inter', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+/* Ensure emojis render properly — use system fonts with emoji fallbacks */
+html, body, div, span, p, h1, h2, h3, h4, h5, h6,
+[data-testid="stAppViewContainer"], [data-testid="stSidebar"],
+[data-testid="stMetric"], [data-testid="stMarkdownContainer"],
+.ststButton, .stMarkdown {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif !important;
 }
 
 [data-testid="stMetric"] {
