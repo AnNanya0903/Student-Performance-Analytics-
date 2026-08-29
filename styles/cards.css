@@ -1,0 +1,92 @@
+/* Minimal card effects only — no layout-breaking rules */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+[data-testid="stMetric"] {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 16px !important;
+  padding: 1.25rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+[data-testid="stMetric"]::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 4px !important;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6) !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+[data-testid="stMetric"]:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3), 0 8px 10px -6px rgba(0,0,0,0.3) !important;
+  border-color: rgba(99,102,241,0.4) !important;
+}
+
+[data-testid="stMetric"]:hover::before {
+  opacity: 1 !important;
+}
+
+[data-testid="stMetric"] [data-testid="stMetricLabel"] {
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #94a3b8 !important;
+  margin-bottom: 0.25rem !important;
+}
+
+[data-testid="stMetric"] [data-testid="stMetricValue"] {
+  font-size: 1.75rem !important;
+  font-weight: 800 !important;
+  color: #f1f5f9 !important;
+}
+
+[data-testid="stPlotlyChart"] {
+  background: #1e293b !important;
+  border-radius: 16px !important;
+  padding: 0.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.3) !important;
+  border: 1px solid #334155 !important;
+  transition: all 0.3s ease !important;
+}
+
+[data-testid="stPlotlyChart"]:hover {
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3), 0 8px 10px -6px rgba(0,0,0,0.3) !important;
+  border-color: rgba(99,102,241,0.3) !important;
+}
+
+[data-testid="stDataFrame"] {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.3) !important;
+  border: 1px solid #334155 !important;
+}
+
+[data-testid="stDataFrame"] th {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.05em !important;
+  padding: 0.75rem 1rem !important;
+}
+
+[data-testid="stDataFrame"] td {
+  padding: 0.6rem 1rem !important;
+  border-bottom: 1px solid #334155 !important;
+  font-size: 0.9rem !important;
+  color: #f1f5f9 !important;
+}
+
+[data-testid="stDataFrame"] tr:hover td {
+  background: rgba(99,102,241,0.05) !important;
+}

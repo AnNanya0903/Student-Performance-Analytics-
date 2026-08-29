@@ -1,0 +1,536 @@
+/* ============================================================
+   Student Performance Analytics — Dark Theme
+   Safe, scoped selectors only
+   ============================================================ */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* CSS Variables */
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #8b5cf6;
+  --accent: #06b6d4;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.3);
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.3), 0 8px 10px -6px rgba(0,0,0,0.3);
+  --radius: 16px;
+}
+
+/* Global font only — keep Streamlit text colors intact */
+html, body, [data-testid="stAppViewContainer"] {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--primary-dark), var(--primary));
+}
+
+/* ============================================================
+   SIDEBAR — scoped to sidebar descendants only
+   ============================================================ */
+[data-testid="stSidebar"] {
+  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%) !important;
+  border-right: 1px solid rgba(99, 102, 241, 0.2) !important;
+  padding-top: 1.5rem !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 100 !important;
+  min-height: 100vh !important;
+  width: 300px !important;
+  min-width: 300px !important;
+  max-width: 300px !important;
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Sidebar text colors — strictly scoped */
+[data-testid="stSidebar"] .stMarkdown,
+[data-testid="stSidebar"] .stMarkdown p,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] div {
+  color: #e0e7ff !important;
+}
+
+[data-testid="stSidebar"] .stMarkdown h1,
+[data-testid="stSidebar"] .stMarkdown h2,
+[data-testid="stSidebar"] .stMarkdown h3 {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+[data-testid="stSidebar"] label {
+  color: #c7d2fe !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+}
+
+[data-testid="stSidebar"] input[type="text"],
+[data-testid="stSidebar"] input[type="number"],
+[data-testid="stSidebar"] textarea,
+[data-testid="stSidebar"] select {
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(99,102,241,0.3) !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+  padding: 0.5rem 0.75rem !important;
+  transition: all 0.3s ease !important;
+}
+
+[data-testid="stSidebar"] input:focus,
+[data-testid="stSidebar"] textarea:focus,
+[data-testid="stSidebar"] select:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.2) !important;
+  outline: none !important;
+}
+
+[data-testid="stSidebar"] .stSlider {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+[data-testid="stSidebar"] .stRadio > label {
+  display: none !important;
+}
+
+[data-testid="stSidebar"] .stRadio > div {
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+}
+
+[data-testid="stSidebar"] .stRadio label {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 10px !important;
+  padding: 0.6rem 1rem !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+[data-testid="stSidebar"] .stRadio label:hover {
+  background: rgba(99,102,241,0.2) !important;
+  border-color: rgba(99,102,241,0.5) !important;
+}
+
+[data-testid="stSidebar"] .stRadio [data-testid="stMarkdownContainer"] p {
+  font-weight: 500 !important;
+}
+
+[data-testid="stSidebar"] .stFileUploader {
+  background: rgba(255,255,255,0.06) !important;
+  border: 2px dashed rgba(99,102,241,0.3) !important;
+  border-radius: 12px !important;
+  padding: 1rem !important;
+}
+
+[data-testid="stSidebar"] .stFileUploader label {
+  display: block !important;
+  text-align: center !important;
+  padding: 0.5rem !important;
+}
+
+[data-testid="stSidebar"] hr {
+  border-color: rgba(255,255,255,0.1) !important;
+  margin: 1.5rem 0 !important;
+}
+
+/* Ensure main content makes room for fixed sidebar */
+[data-testid="stAppViewContainer"] > .main {
+  padding: 2rem 3rem !important;
+  margin-left: 300px !important;
+  max-width: calc(100% - 300px) !important;
+}
+
+/* ============================================================
+   MAIN AREA — dark backgrounds for cards/containers
+   ============================================================ */
+[data-testid="stMetric"] {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  padding: 1.25rem !important;
+  box-shadow: var(--shadow) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+[data-testid="stMetric"]::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 4px !important;
+  background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+[data-testid="stMetric"]:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-color: rgba(99,102,241,0.3) !important;
+}
+
+[data-testid="stMetric"]:hover::before {
+  opacity: 1 !important;
+}
+
+[data-testid="stMetric"] [data-testid="stMetricLabel"] {
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--text-muted) !important;
+  margin-bottom: 0.25rem !important;
+}
+
+[data-testid="stMetric"] [data-testid="stMetricValue"] {
+  font-size: 1.75rem !important;
+  font-weight: 800 !important;
+  color: var(--text) !important;
+}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+[data-testid="stTabs"] {
+  gap: 0.5rem !important;
+  background: transparent !important;
+  border-bottom: 2px solid var(--border) !important;
+  padding-bottom: 0 !important;
+}
+
+[data-testid="stTabs"] button {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 12px 12px 0 0 !important;
+  padding: 0.75rem 1.25rem !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  color: var(--text-muted) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+}
+
+[data-testid="stTabs"] button:hover {
+  color: var(--primary) !important;
+  background: rgba(99,102,241,0.05) !important;
+}
+
+[data-testid="stTabs"] button[aria-selected="true"] {
+  color: var(--primary) !important;
+  background: rgba(99,102,241,0.08) !important;
+}
+
+[data-testid="stTabs"] button[aria-selected="true"]::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
+  border-radius: 3px 3px 0 0 !important;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.stButton > button {
+  background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 0.6rem 1.5rem !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  box-shadow: 0 4px 15px rgba(99,102,241,0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.stButton > button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(99,102,241,0.4) !important;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary)) !important;
+}
+
+.stButton > button:active {
+  transform: translateY(0) !important;
+}
+
+/* Primary button override */
+button[kind="primary"] {
+  background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(99,102,241,0.3) !important;
+}
+
+/* ============================================================
+   DATAFRAMES / TABLES
+   ============================================================ */
+[data-testid="stDataFrame"] {
+  border-radius: var(--radius) !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow) !important;
+  border: 1px solid var(--border) !important;
+}
+
+[data-testid="stDataFrame"] table {
+  border-collapse: collapse !important;
+}
+
+[data-testid="stDataFrame"] th {
+  background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.05em !important;
+  padding: 0.75rem 1rem !important;
+}
+
+[data-testid="stDataFrame"] td {
+  padding: 0.6rem 1rem !important;
+  border-bottom: 1px solid var(--border) !important;
+  font-size: 0.9rem !important;
+  color: var(--text) !important;
+}
+
+[data-testid="stDataFrame"] tr:hover td {
+  background: rgba(99,102,241,0.04) !important;
+}
+
+/* ============================================================
+   EXPANDERS
+   ============================================================ */
+[data-testid="stExpander"] {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+  overflow: hidden !important;
+}
+
+[data-testid="stExpander"] summary {
+  font-weight: 600 !important;
+  padding: 1rem 1.25rem !important;
+  transition: all 0.3s ease !important;
+  color: var(--text) !important;
+}
+
+[data-testid="stExpander"] summary:hover {
+  background: rgba(99,102,241,0.04) !important;
+}
+
+/* ============================================================
+   ALERTS / INFO / WARNING / SUCCESS / ERROR
+   ============================================================ */
+[data-testid="stInfo"],
+[data-testid="stWarning"],
+[data-testid="stSuccess"],
+[data-testid="stError"] {
+  border-radius: 12px !important;
+  border: none !important;
+  padding: 1rem 1.25rem !important;
+  box-shadow: var(--shadow) !important;
+  font-weight: 500 !important;
+  color: var(--text) !important;
+}
+
+[data-testid="stInfo"] {
+  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15)) !important;
+  border-left: 4px solid var(--primary) !important;
+}
+
+[data-testid="stSuccess"] {
+  background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(6,182,212,0.15)) !important;
+  border-left: 4px solid var(--success) !important;
+}
+
+[data-testid="stWarning"] {
+  background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(239,68,68,0.1)) !important;
+  border-left: 4px solid var(--warning) !important;
+}
+
+[data-testid="stError"] {
+  background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.1)) !important;
+  border-left: 4px solid var(--danger) !important;
+}
+
+/* ============================================================
+   DOWNLOAD BUTTON
+   ============================================================ */
+[data-testid="stDownloadButton"] > button {
+  background: var(--card-bg) !important;
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+[data-testid="stDownloadButton"] > button:hover {
+  background: var(--primary) !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(99,102,241,0.3) !important;
+}
+
+/* ============================================================
+   CODE BLOCKS
+   ============================================================ */
+[data-testid="stCode"] {
+  background: #1e293b !important;
+  border-radius: 12px !important;
+  border: 1px solid #334155 !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  font-size: 0.85rem !important;
+  box-shadow: var(--shadow) !important;
+  color: var(--text) !important;
+}
+
+/* ============================================================
+   TEXT AREA
+   ============================================================ */
+[data-testid="stTextArea"] textarea {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  font-family: 'Inter', sans-serif !important;
+  color: var(--text) !important;
+}
+
+/* ============================================================
+   SELECTBOX
+   ============================================================ */
+[data-testid="stSelectbox"] > div > div {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  color: var(--text) !important;
+}
+
+/* ============================================================
+   SPINNER
+   ============================================================ */
+[data-testid="stSpinner"] > div {
+  border-top-color: var(--primary) !important;
+}
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+[data-testid="stProgress"] > div > div {
+  background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
+  border-radius: 10px !important;
+}
+
+/* ============================================================
+   CHART CONTAINERS
+   ============================================================ */
+[data-testid="stPlotlyChart"] {
+  background: var(--card-bg) !important;
+  border-radius: var(--radius) !important;
+  padding: 0.5rem !important;
+  box-shadow: var(--shadow) !important;
+  border: 1px solid var(--border) !important;
+  transition: all 0.3s ease !important;
+}
+
+[data-testid="stPlotlyChart"]:hover {
+  box-shadow: var(--shadow-lg) !important;
+  border-color: rgba(99,102,241,0.2) !important;
+}
+
+/* ============================================================
+   CAPTION
+   ============================================================ */
+[data-testid="stCaption"] {
+  color: var(--text-muted) !important;
+  font-size: 0.85rem !important;
+  font-style: italic !important;
+}
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+hr {
+  border: none !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, var(--border), transparent) !important;
+  margin: 2rem 0 !important;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-testid="stMetric"],
+[data-testid="stPlotlyChart"],
+[data-testid="stDataFrame"] {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  [data-testid="stAppViewContainer"] > .main {
+    padding: 1rem !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
+  }
+  
+  [data-testid="stSidebar"] {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+  
+  [data-testid="stMetric"] [data-testid="stMetricValue"] {
+    font-size: 1.25rem !important;
+  }
+}
