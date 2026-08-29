@@ -1,6 +1,11 @@
 /* Minimal card effects only — no layout-breaking rules */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
+/* Ensure emojis render properly alongside Inter font */
+html, body, [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {
+  font-family: 'Inter', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+}
+
 [data-testid="stMetric"] {
   background: #1e293b !important;
   border: 1px solid #334155 !important;
