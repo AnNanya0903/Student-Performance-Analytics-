@@ -100,11 +100,10 @@ def safe_load(uploaded_file):
 st.sidebar.markdown(
     """
     <div style="text-align: center; padding: 0.5rem 0 1.5rem 0;">
-        <h1 style="font-size: 1.5rem; margin: 0; background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline;">
-            <span style="-webkit-text-fill-color: initial; font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;">📊</span> 
-            <span style="font-family: 'Inter', sans-serif;">Analytics</span>
-        </h1>
-        <p style="color: #a5b4fc; font-size: 0.8rem; margin: 0.25rem 0 0 0;">Student Performance</p>
+        <div style="font-size: 1.5rem; margin: 0; background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline; font-weight: 700;">
+            Analytics
+        </div>
+        <p style="color: #a5b4fc; font-size: 0.8rem; margin: 0.25rem 0 0 0;">📊 Student Performance</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -206,12 +205,11 @@ st.sidebar.caption(f"Showing **{len(filtered_df)}** of **{len(df)}** students af
 st.markdown(
     """
     <div style="margin-bottom: 2rem;">
-        <h1 style="font-size: 2.5rem; font-weight: 800; margin: 0; background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            <span style="-webkit-text-fill-color: initial; font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;">🎓</span> 
-            <span style="font-family: 'Inter', sans-serif;">Student Performance Analytics</span>
-        </h1>
+        <div style="font-size: 2.5rem; font-weight: 800; margin: 0; background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline;">
+            Student Performance Analytics
+        </div>
         <p style="color: #64748b; font-size: 1.1rem; margin-top: 0.5rem; font-weight: 400;">
-            Interactive dashboard for academic insights, risk analysis, and performance tracking
+            🎓 Interactive dashboard for academic insights, risk analysis, and performance tracking
         </p>
     </div>
     """,
