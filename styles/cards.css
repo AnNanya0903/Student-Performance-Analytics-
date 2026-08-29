@@ -1,6 +1,6 @@
-/* Minimal card effects only — no layout-breaking rules */
+/* Minimal card effects only - no layout-breaking rules */
 
-/* Ensure emojis render properly — use system fonts with emoji fallbacks */
+/* Ensure emojis render properly - use system fonts with emoji fallbacks */
 html, body, div, span, p, h1, h2, h3, h4, h5, h6,
 [data-testid="stAppViewContainer"], [data-testid="stSidebar"],
 [data-testid="stMetric"], [data-testid="stMarkdownContainer"],
